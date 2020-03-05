@@ -8,7 +8,7 @@ class CreateUniqueSportComplexTable extends Migration
 {
     public function up()
     {
-        Schema::create('unique_sport_complex', function (Blueprint $table) {
+        Schema::create('tbl_unique_sport_complex', function (Blueprint $table) {
             $table->id();
             $table->string('area_name', 45);
             $table->string('location', 45);
@@ -20,6 +20,6 @@ class CreateUniqueSportComplexTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('unique_sport_complex');
+        Schema::dropIfExists('tbl_unique_sport_complex');
     }
 }

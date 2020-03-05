@@ -8,7 +8,7 @@ class CreateCommissarTable extends Migration
 {
     public function up()
     {
-        Schema::create('commissar', function (Blueprint $table) {
+        Schema::create('tbl_commissar', function (Blueprint $table) {
             $table->id();
             $table->string('name', 45);
             $table->timestamps();
@@ -17,6 +17,6 @@ class CreateCommissarTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('commissar');
+        Schema::dropIfExists('tbl_commissar');
     }
 }

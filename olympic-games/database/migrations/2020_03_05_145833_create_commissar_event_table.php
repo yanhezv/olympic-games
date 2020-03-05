@@ -8,7 +8,7 @@ class CreateCommissarEventTable extends Migration
 {
     public function up()
     {
-        Schema::create('commissar_event', function (Blueprint $table) {
+        Schema::create('tbl_commissar_event', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('commissar_id');
             $table->bigInteger('event_id');
@@ -19,6 +19,6 @@ class CreateCommissarEventTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('commissar_event');
+        Schema::dropIfExists('tbl_commissar_event');
     }
 }

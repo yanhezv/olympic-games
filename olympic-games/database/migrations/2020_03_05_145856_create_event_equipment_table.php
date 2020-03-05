@@ -8,7 +8,7 @@ class CreateEventEquipmentTable extends Migration
 {
     public function up()
     {
-        Schema::create('event_equipment', function (Blueprint $table) {
+        Schema::create('tbl_event_equipment', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('event_id');
             $table->bigInteger('equipment_id');
@@ -18,6 +18,6 @@ class CreateEventEquipmentTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('event_equipment');
+        Schema::dropIfExists('tbl_event_equipment');
     }
 }

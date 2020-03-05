@@ -8,7 +8,7 @@ class CreateSportsCenterComplexTable extends Migration
 {
     public function up()
     {
-        Schema::create('sports_center_complex', function (Blueprint $table) {
+        Schema::create('tbl_sports_center_complex', function (Blueprint $table) {
             $table->id();
             $table->string('sport', 45);
             $table->string('zone', 45);
@@ -20,6 +20,6 @@ class CreateSportsCenterComplexTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('sports_center_complex');
+        Schema::dropIfExists('tbl_sports_center_complex');
     }
 }

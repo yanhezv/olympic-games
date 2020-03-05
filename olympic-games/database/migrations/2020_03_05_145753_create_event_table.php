@@ -8,7 +8,7 @@ class CreateEventTable extends Migration
 {
     public function up()
     {
-        Schema::create('event', function (Blueprint $table) {
+        Schema::create('tbl_event', function (Blueprint $table) {
             $table->id();
             $table->string('name', 45);
             $table->dateTime('date');
@@ -22,6 +22,6 @@ class CreateEventTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('event');
+        Schema::dropIfExists('tbl_event');
     }
 }

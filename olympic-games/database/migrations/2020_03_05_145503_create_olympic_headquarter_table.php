@@ -8,7 +8,7 @@ class CreateOlympicHeadquarterTable extends Migration
 {
     public function up()
     {
-        Schema::create('olympic_headquarter', function (Blueprint $table) {
+        Schema::create('tbl_olympic_headquarter', function (Blueprint $table) {
             $table->id();
             $table->string('name', 45);
             $table->string('location', 45);
@@ -20,6 +20,6 @@ class CreateOlympicHeadquarterTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('olympic_headquarter');
+        Schema::dropIfExists('tbl_olympic_headquarter');
     }
 }
