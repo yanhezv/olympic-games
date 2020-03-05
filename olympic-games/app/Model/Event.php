@@ -8,6 +8,8 @@ class Event extends Model
 {
     protected $table      = 'tbl_event';
     protected $primaryKey = 'id';
+    protected $fillable   = ['name', 'date', 'duration', 'number_of_participants', 'number_of_commissioners', 'sport_complex_id'];
+    protected $hidden     = ['created_at', 'updated_at'];
 
     public function commissarEvents()
     {

@@ -8,6 +8,8 @@ class Commissar extends Model
 {
     protected $table      = 'tbl_commissar';
     protected $primaryKey = 'id';
+    protected $fillable   = ['name'];
+    protected $hidden     = ['created_at', 'updated_at'];
 
     public function commissarEvents()
     {

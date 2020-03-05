@@ -8,6 +8,8 @@ class Area extends Model
 {
     protected $table      = 'tbl_area';
     protected $primaryKey = 'id';
+    protected $fillable   = ['area_name', 'location'];
+    protected $hidden     = ['created_at', 'updated_at'];
 
     public function sportsCenterComplexs()
     {

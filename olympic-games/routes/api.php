@@ -29,5 +29,9 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
     Route::group(['prefix' => 'sedes-olimpicas'], function () {
         Route::get('/', 'API\OlympicHeadquarterController@index');
+        Route::post('/', 'API\OlympicHeadquarterController@store');
+        Route::get('/{id}', 'API\OlympicHeadquarterController@show');
+        Route::put('/{id}', 'API\OlympicHeadquarterController@update');
+        Route::delete('/{id}', 'API\OlympicHeadquarterController@destroy');
     });
 });

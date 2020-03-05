@@ -11,6 +11,8 @@ class SportComplex extends Model
 
     protected $table      = 'tbl_sport_complex';
     protected $primaryKey = 'id';
+    protected $fillable   = ['location', 'head_of_organization', 'total_area', 'complex_type', 'olympic_headquarter_id'];
+    protected $hidden     = ['created_at', 'updated_at'];
 
     public function uniqueSportComplexs()
     {

@@ -11,6 +11,8 @@ class CommissarEvent extends Model
 
     protected $table      = 'tbl_commissar_event';
     protected $primaryKey = 'id';
+    protected $fillable   = ['commissar_id', 'event_id', 'commisar_task'];
+    protected $hidden     = ['created_at', 'updated_at'];
 
     public function event()
     {

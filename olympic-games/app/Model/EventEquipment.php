@@ -8,6 +8,8 @@ class EventEquipment extends Model
 {
     protected $table      = 'tbl_event_equipment';
     protected $primaryKey = 'id';
+    protected $fillable   = ['event_id', 'equipment_id'];
+    protected $hidden     = ['created_at', 'updated_at'];
 
     public function event()
     {

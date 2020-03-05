@@ -8,6 +8,8 @@ class SportsCenterComplex extends Model
 {
     protected $table      = 'tbl_sports_center_complex';
     protected $primaryKey = 'id';
+    protected $fillable   = ['sport', 'zone', 'sport_complex_id', 'area_id'];
+    protected $hidden     = ['created_at', 'updated_at'];
 
     public function sportComplex()
     {
