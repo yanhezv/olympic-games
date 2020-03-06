@@ -105,6 +105,10 @@ class OlympicHeadquarterController extends Controller
             $obj = OlympicHeadquarter::find($id);
             if (is_null($obj)) { throw new Exception("No existe sede olímpica.", 1); }
 
+            if ($obj->sportComplexs()->count() > 0) {
+                throw new Exception("Imposible eliminar sede olímpica", 1);
+            }
+
             $result = $obj->delete();
             if (!$result) { throw new Exception("Error al eliminar la sede olimpíca", 1); }
 
