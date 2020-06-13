@@ -1,0 +1,10 @@
+version: '2'
+services:
+  php72-apache:
+    container_name: ${COMPOSE_PROJECT_NAME}_apache
+    build: .
+    volumes:
+      - ${PROJECT_DIRECTORY}:/var/www/html/olympic-games
+    ports:
+      - ${APACHE_EXPOSED_PORT}:80
+      
