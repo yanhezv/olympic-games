@@ -10,6 +10,7 @@ class OlympicHeadquarter extends Model
     protected $primaryKey = 'id';
     protected $fillable   = ['name', 'location', 'number_of_complexes', 'budget'];
     protected $hidden     = ['created_at', 'updated_at'];
+    protected $casts      = ['budget' => 'float'];
 
     public function sportComplexs()
     {
