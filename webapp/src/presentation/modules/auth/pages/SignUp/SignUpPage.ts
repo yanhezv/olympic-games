@@ -4,9 +4,11 @@ import { Component, Vue } from "vue-property-decorator";
 export default class LoginPage extends Vue {
    private email = "";
    private password = "";
+   private confirmPassword = "";
    private isPassword = true;
+   private isConfirmPassword = true;
 
-   private login() {
-      console.log("LOGIN");
+   private signUp() {
+      console.log("SIGN UP");
    }
 }

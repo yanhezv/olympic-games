@@ -1,4 +1,4 @@
-q-layout(view='lHr LpR lFr' dark)
+q-layout(view='lHr LpR lFr')
     q-header.bg-white.text-dark(
         bordered
         reveal
@@ -61,7 +61,7 @@ q-layout(view='lHr LpR lFr' dark)
                     q-item-label Inicio
 
             q-item(
-                :to = "{ name: 'login' }"
+                :to = "{ name: 'olympicHeadquarter' }"
                 exact
                 v-ripple
             )
@@ -69,7 +69,7 @@ q-layout(view='lHr LpR lFr' dark)
                     q-icon(name="search")
 
                 q-item-section
-                    q-item-label Login
+                    q-item-label Sedes olímpicas
 
-    q-page-container.l-main__container
+    q-page-container
         router-view

@@ -24,6 +24,7 @@ import {
    QSpace,
    QBtnDropdown,
    QSeparator,
+   QInput,
    ClosePopup,
    Ripple
 } from "quasar";
@@ -46,7 +47,8 @@ Vue.use(Quasar, {
       QItemLabel,
       QSpace,
       QBtnDropdown,
-      QSeparator
+      QSeparator,
+      QInput
    },
    directives: {
       ClosePopup,

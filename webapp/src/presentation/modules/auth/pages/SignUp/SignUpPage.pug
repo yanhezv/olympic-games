@@ -1,6 +1,6 @@
 .p-login.q-pa-lg
     .row.justify-center.q-mb-lg
-        h1.text-h5.text-secondary.text-weight-bold Inciar sesión
+        h1.text-h5.text-secondary.text-weight-bold Proceso de registro
 
     q-input.q-mb-lg(
         v-model = "email"
@@ -29,17 +29,34 @@
                 @click = "isPassword = !isPassword"
             )
 
+    q-input.q-mb-lg(
+        v-model = "confirmPassword"
+        :type   = "isConfirmPassword ? 'password' : 'text'"
+        label   = "Confirmar contraseña"
+        outlined
+    )
+        template(v-slot:prepend)
+            q-icon.cursor-pointer(
+                name = "lock_outline"
+            )
+
+        template(v-slot:append)
+            q-icon.cursor-pointer(
+                :name  = "isConfirmPassword ? 'visibility_off' : 'visibility'"
+                @click = "isConfirmPassword = !isConfirmPassword"
+            )
+
     .row.justify-between
         q-btn(
-            :to = "{ name: 'signUp' }"
-            label = "Registrate"
+            :to = "{ name: 'login' }"
+            label = "Iniciar sesión"
             color = "secondary"
             flat
         )
 
         q-btn(
-            @click = "login"
-            label  = "Ingresar"
+            @click = "signUp"
+            label  = "Registrarse"
             color  = "primary"
             outline
         )

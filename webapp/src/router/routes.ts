@@ -7,9 +7,17 @@ const LoginPage = () =>
    import(
       /* webpackChunkName: "login" */ "@/presentation/modules/auth/pages/Login/LoginPage.vue"
    );
+const SignUpPage = () =>
+   import(
+      /* webpackChunkName: "login" */ "@/presentation/modules/auth/pages/SignUp/SignUpPage.vue"
+   );
 const DashboardPage = () =>
    import(
       /* webpackChunkName: "dashboard" */ "@/presentation/modules/intranet/pages/Dashboard/DashboardPage.vue"
+   );
+const OlympicHeadquarterPage = () =>
+   import(
+      /* webpackChunkName: "dashboard" */ "@/presentation/modules/intranet/pages/OlympicHeadquarter/OlympicHeadquarterPage.vue"
    );
 
 export const routes: RouteConfig[] = [
@@ -21,12 +29,12 @@ export const routes: RouteConfig[] = [
             path: "",
             name: "login",
             component: LoginPage
+         },
+         {
+            path: "/sign-up",
+            name: "signUp",
+            component: SignUpPage
          }
-         // {
-         //    path: "/sign-up",
-         //    name: "signUp",
-         //    component: () => import("@/screens/auth/sign-up/SignUpScreen"),
-         // },
       ]
    },
    {
@@ -38,6 +46,11 @@ export const routes: RouteConfig[] = [
             path: "",
             name: "dashboard",
             component: DashboardPage
+         },
+         {
+            path: "olympic-headquarter",
+            name: "olympicHeadquarter",
+            component: OlympicHeadquarterPage
          }
       ]
    },

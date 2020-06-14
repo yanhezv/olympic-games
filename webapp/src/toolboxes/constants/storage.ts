@@ -1,0 +1,3 @@
+const LocalKey = {
+   User: 'user'
+}
