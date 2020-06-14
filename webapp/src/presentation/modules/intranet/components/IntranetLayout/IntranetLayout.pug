@@ -1,0 +1,75 @@
+q-layout(view='lHr LpR lFr' dark)
+    q-header.bg-white.text-dark(
+        bordered
+        reveal
+    )
+        q-toolbar
+            q-toolbar-title(shrink)
+                span Comprobantes
+
+            q-space
+
+            q-btn(
+                @click = 'isOpenDrawer = !isOpenDrawer'
+                icon   = 'menu'
+                color  = "primary"
+                stretch
+                flat
+            )
+
+            q-btn-dropdown(
+                :label = 'username'
+                stretch
+                flat
+            )
+                q-list(
+                    bordered
+                )
+                    q-item(
+                        @click=
+                        v-close-popup
+                        clickable
+                    )
+                        q-item-section Cerrar sesión
+
+    q-drawer(
+        v-model     = 'isOpenDrawer'
+        :width      = '260'
+        :breakpoint = 'breakpoint'
+        side        = 'left'
+        show-if-above
+        bordered
+    )
+        .l-intranet__logo.q-pa-md.column.items-center
+            figure.l-intranet__figure
+                img.l-intranet__image(src="@/assets/logo.svg" alt="Logo")
+            span.l-intranet__name Juegos Olímpicos
+
+        //- q-separator
+
+        q-list(padding)
+            q-item-label(header) Essential Links
+            q-item(
+                :to = "{ name: 'dashboard' }"
+                exact
+                v-ripple
+            )
+                q-item-section(side)
+                    q-icon(name="home")
+
+                q-item-section
+                    q-item-label Inicio
+
+            q-item(
+                :to = "{ name: 'login' }"
+                exact
+                v-ripple
+            )
+                q-item-section(side)
+                    q-icon(name="search")
+
+                q-item-section
+                    q-item-label Login
+
+    q-page-container.l-main__container
+        router-view
