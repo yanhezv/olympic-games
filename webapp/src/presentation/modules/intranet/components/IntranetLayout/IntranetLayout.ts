@@ -1,4 +1,6 @@
 import { Component, Vue } from "vue-property-decorator";
+import { authService } from "@/presentation/services/AuthService";
+import { Notify } from "@/presentation/elements/Notify";
 
 @Component
 export default class IntranetLayout extends Vue {
@@ -7,6 +9,14 @@ export default class IntranetLayout extends Vue {
    private username = "OMAR";
 
    private logout() {
-      console.log("LOGOUT");
+      authService
+         .logout()
+         .then(() => {
+            Notify.success("Nos vemos pronto. Cuídese");
+            this.$router.push({ name: "login" });
+         })
+         .catch(error => {
+            console.log(error);
+         });
    }
 }

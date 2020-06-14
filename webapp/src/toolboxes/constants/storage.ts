@@ -1,3 +1,4 @@
-const LocalKey = {
-   User: 'user'
-}
+export const LocalKey = {
+   User: "user",
+   Token: "token"
+};

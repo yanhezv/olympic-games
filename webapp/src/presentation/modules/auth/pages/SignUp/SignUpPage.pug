@@ -2,61 +2,85 @@
     .row.justify-center.q-mb-lg
         h1.text-h5.text-secondary.text-weight-bold Proceso de registro
 
-    q-input.q-mb-lg(
-        v-model = "email"
-        label   = "Correo electrónico"
-        outlined
-    )
-        template(v-slot:prepend)
-            q-icon.cursor-pointer(
-                name = "mail_outline"
-            )
-
-    q-input.q-mb-lg(
-        v-model = "password"
-        :type   = "isPassword ? 'password' : 'text'"
-        label   = "Contraseña"
-        outlined
-    )
-        template(v-slot:prepend)
-            q-icon.cursor-pointer(
-                name = "lock_outline"
-            )
-
-        template(v-slot:append)
-            q-icon.cursor-pointer(
-                :name  = "isPassword ? 'visibility_off' : 'visibility'"
-                @click = "isPassword = !isPassword"
-            )
-
-    q-input.q-mb-lg(
-        v-model = "confirmPassword"
-        :type   = "isConfirmPassword ? 'password' : 'text'"
-        label   = "Confirmar contraseña"
-        outlined
-    )
-        template(v-slot:prepend)
-            q-icon.cursor-pointer(
-                name = "lock_outline"
-            )
-
-        template(v-slot:append)
-            q-icon.cursor-pointer(
-                :name  = "isConfirmPassword ? 'visibility_off' : 'visibility'"
-                @click = "isConfirmPassword = !isConfirmPassword"
-            )
-
-    .row.justify-between
-        q-btn(
-            :to = "{ name: 'login' }"
-            label = "Iniciar sesión"
-            color = "secondary"
-            flat
+    q-form.q-gutter-sm(@submit.prevent.stop="signUp")
+        q-input(
+            name          = "name"
+            v-model       = "name"
+            label         = "Nombre"
+            :rules        = "[ val => val.length > 0 ]"
+            error-message = "Nombre requerido"
+            outlined
         )
+            template(v-slot:prepend)
+                q-icon.cursor-pointer(
+                    name = "person_outline"
+                )
 
-        q-btn(
-            @click = "signUp"
-            label  = "Registrarse"
-            color  = "primary"
-            outline
+        q-input(
+            name          = "email"
+            v-model       = "email"
+            type          = "email"
+            label         = "Correo electrónico"
+            :rules        = "[isValidEmail]"
+            error-message = "Email incorrecto"
+            outlined
         )
+            template(v-slot:prepend)
+                q-icon.cursor-pointer(
+                    name = "mail_outline"
+                )
+
+        q-input(
+            name          = "password"
+            v-model       = "password"
+            :type         = "isPassword ? 'password' : 'text'"
+            label         = "Contraseña"
+            :rules        = "[ val => val.length >= 6 ]"
+            error-message = "La contraseña debe tener mínimo 6 carácteres."
+            outlined
+        )
+            template(v-slot:prepend)
+                q-icon.cursor-pointer(
+                    name = "lock_outline"
+                )
+
+            template(v-slot:append)
+                q-icon.cursor-pointer(
+                    :name  = "isPassword ? 'visibility_off' : 'visibility'"
+                    @click = "isPassword = !isPassword"
+                )
+
+        q-input(
+            name          = "confirmPassword"
+            v-model       = "confirmPassword"
+            :type         = "isConfirmPassword ? 'password' : 'text'"
+            label         = "Confirmar contraseña"
+            :rules        = "[ val => val.length >= 6 && val === password ]"
+            error-message = "La contraseña debe igual a la anterior."
+            outlined
+        )
+            template(v-slot:prepend)
+                q-icon.cursor-pointer(
+                    name = "lock_outline"
+                )
+
+            template(v-slot:append)
+                q-icon.cursor-pointer(
+                    :name  = "isConfirmPassword ? 'visibility_off' : 'visibility'"
+                    @click = "isConfirmPassword = !isConfirmPassword"
+                )
+
+        .row.justify-between
+            q-btn(
+                :to = "{ name: 'login' }"
+                label = "Iniciar sesión"
+                color = "secondary"
+                flat
+            )
+
+            q-btn(
+                type   = "submit"
+                label  = "Registrarse"
+                color  = "primary"
+                outline
+            )

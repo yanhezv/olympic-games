@@ -25,8 +25,11 @@ import {
    QBtnDropdown,
    QSeparator,
    QInput,
+   QForm,
    ClosePopup,
-   Ripple
+   Ripple,
+   Notify,
+   Dialog
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -48,11 +51,15 @@ Vue.use(Quasar, {
       QSpace,
       QBtnDropdown,
       QSeparator,
-      QInput
+      QInput,
+      QForm
    },
    directives: {
       ClosePopup,
       Ripple
    },
-   plugins: {}
+   plugins: {
+      Notify,
+      Dialog
+   }
 });

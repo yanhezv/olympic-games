@@ -1,45 +1,53 @@
 .p-login.q-pa-lg
-    .row.justify-center.q-mb-lg
+    .row.justify-center.q-pb-lg
         h1.text-h5.text-secondary.text-weight-bold Inciar sesión
 
-    q-input.q-mb-lg(
-        v-model = "email"
-        label   = "Correo electrónico"
-        outlined
-    )
-        template(v-slot:prepend)
-            q-icon.cursor-pointer(
-                name = "mail_outline"
-            )
-
-    q-input.q-mb-lg(
-        v-model = "password"
-        :type   = "isPassword ? 'password' : 'text'"
-        label   = "Contraseña"
-        outlined
-    )
-        template(v-slot:prepend)
-            q-icon.cursor-pointer(
-                name = "lock_outline"
-            )
-
-        template(v-slot:append)
-            q-icon.cursor-pointer(
-                :name  = "isPassword ? 'visibility_off' : 'visibility'"
-                @click = "isPassword = !isPassword"
-            )
-
-    .row.justify-between
-        q-btn(
-            :to = "{ name: 'signUp' }"
-            label = "Registrate"
-            color = "secondary"
-            flat
+    q-form.q-gutter-sm(@submit.prevent.stop="login")
+        q-input(
+            name          = "email"
+            v-model       = "email"
+            type          = "email"
+            label         = "Correo electrónico"
+            :rules        = "[isValidEmail]"
+            error-message = "Email incorrecto"
+            outlined
         )
+            template(v-slot:prepend)
+                q-icon.cursor-pointer(
+                    name = "mail_outline"
+                )
 
-        q-btn(
-            @click = "login"
-            label  = "Ingresar"
-            color  = "primary"
-            outline
+        q-input(
+            name          = "password"
+            v-model       = "password"
+            :type         = "isPassword ? 'password' : 'text'"
+            label         = "Contraseña"
+            :rules        = "[ val => val.length >= 6 ]"
+            error-message = "La contraseña debe tener mínimo 6 carácteres."
+            outlined
         )
+            template(v-slot:prepend)
+                q-icon.cursor-pointer(
+                    name = "lock_outline"
+                )
+
+            template(v-slot:append)
+                q-icon.cursor-pointer(
+                    :name  = "isPassword ? 'visibility_off' : 'visibility'"
+                    @click = "isPassword = !isPassword"
+                )
+
+        .row.justify-between
+            q-btn(
+                :to = "{ name: 'signUp' }"
+                label = "Registrate"
+                color = "secondary"
+                flat
+            )
+
+            q-btn(
+                type   = "submit"
+                label  = "Ingresar"
+                color  = "primary"
+                outline
+            )
