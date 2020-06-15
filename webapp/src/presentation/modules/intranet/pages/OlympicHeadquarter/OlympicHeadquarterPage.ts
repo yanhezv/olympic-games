@@ -100,6 +100,7 @@ export default class OlympicHeadquarterPage extends Vue {
    }
 
    private resetCurrentItem() {
+      this.editMode = false;
       this.currentItem = {
          name: "",
          location: "",

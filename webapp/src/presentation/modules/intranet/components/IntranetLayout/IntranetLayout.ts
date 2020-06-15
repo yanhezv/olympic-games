@@ -6,7 +6,7 @@ import { Notify } from "@/presentation/elements/Notify";
 export default class IntranetLayout extends Vue {
    private breakpoint = 768;
    private isOpenDrawer = false;
-   private username = "OMAR";
+   private username = "Cuenta";
 
    private logout() {
       authService

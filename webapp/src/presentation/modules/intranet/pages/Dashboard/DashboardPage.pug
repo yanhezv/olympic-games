@@ -1,2 +1,42 @@
-.dashboard
-    h6 DASHBOARD
+.p-dashboard
+    .p-dashboard__card
+        h5.text-center Bienvenido
+        h6.text-center.text-primary Sistema de Administración de Juegos Olímpicos
+        .q-card.q-mt-lg.q-pa-md
+            .row.text-primary.text-bold.q-mb-md Autor:
+            .row VILLANUEVA SOTELO OMAR YAÑEZ
+            .row yanhezv@gmail.com
+            .row (+51) 989 362 743
+            .row.justify-end
+                q-btn.q-mt-md(
+                    type   = "a"
+                    href   = "https://www.linkedin.com/in/yanhezv/"
+                    target = "__blank"
+                    label  = "Linkedin"
+                    color  = "primary"
+                    no-caps
+                )
+            q-separator.q-my-md
+            .row.justify-center Proyecto realizado usando:
+            .row.items-center.justify-center
+                q-btn(
+                    type   = "a"
+                    href   = "https://vuejs.org/"
+                    target = "__blank"
+                    label  = "Vue JS"
+                    color  = "primary"
+                    no-caps
+                    dense
+                    flat
+                )
+                | y
+                q-btn(
+                    type   = "a"
+                    href   = "https://quasar.dev/"
+                    target = "__blank"
+                    label  = "Quasar Framework"
+                    color  = "primary"
+                    no-caps
+                    dense
+                    flat
+                )

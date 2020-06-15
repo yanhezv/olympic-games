@@ -1,11 +1,11 @@
-.p-olympic-headquarter.q-pa-md
+.p-sport-complex.q-pa-md
     q-table(
-        :data              = "olympicHeadquarters"
+        :data              = "sportComplexs"
         :columns           = "columns"
         :loading           = "loading"
         :filter            = "filter"
         title              = "Sedes olímpicas"
-        row-key            = "name"
+        row-key            = "location"
         color              = "primary"
         table-header-class = "text-primary"
         :pagination        = "{rowsPerPage: 7}"
@@ -65,51 +65,68 @@
     q-dialog(v-model="dialogForm")
         q-card
             q-card-section
-                .text-h6 {{ editMode ? 'Actualizando Sede Olímpica' : 'Nueva Sede Olímpica'}}
+                .text-h6 {{ editMode ? 'Actualizar complejo deportivo' : 'Nuevo complejo deportivo'}}
 
             q-card-section
                 q-form(@submit.prevent.stop = "save")
                     .row.q-gutter-sm
                         q-input.col-12.col-sm(
-                            name          = "name"
-                            v-model       = "currentItem.name"
-                            label         = "Nombre de sede"
+                            name          = "location"
+                            v-model       = "currentItem.location"
+                            label         = "Ubicación del complejo"
                             :rules        = "[ val => val.length > 0 ]"
                             error-message = "Requerido"
                             outlined
                         )
 
+                        q-input.col(
+                            name          = "total_area"
+                            v-model       = "currentItem.total_area"
+                            label         = "Área total"
+                            :rules        = "[ val => parseInt(val,10) >= 0 ]"
+                            error-message = "Mayor o igual a 0"
+                            outlined
+                        )
+
+                    .row
                         q-input.col-12.col-sm(
-                            name          = "location"
-                            v-model       = "currentItem.location"
-                            label         = "Ubicación de la sede"
+                            name          = "head_of_organization"
+                            v-model       = "currentItem.head_of_organization"
+                            label         = "Jefe organizador"
                             :rules        = "[ val => val.length > 0 ]"
                             error-message = "Requerido"
                             outlined
                         )
 
                     .row.q-gutter-sm
-                        q-input.col(
-                            name          = "number_of_complexes"
-                            type          = "number"
-                            v-model       = "currentItem.number_of_complexes"
-                            label         = "N° de complejos"
-                            :rules        = "[ val => parseInt(val,10) >= 0 ]"
-                            error-message = "Mayor o igual a 0"
+
+                        q-select.col(
+                            label    = "Tipo de complejo"
+                            v-model  = "complexTypeSelected"
+                            :options = "complexTypes"
+                            color    = "primary"
                             outlined
                         )
+                            template(
+                                slot       = "selected-item"
+                                slot-scope = "slotProps"
+                            )
+                                .ellipsis {{slotProps.opt.label}}
 
-                        q-input.col(
-                            name          = "budget"
-                            v-model       = "currentItem.budget"
-                            label         = "Presupuesto"
-                            :rules        = "[ val => parseInt(val,10) >= 0 ]"
-                            error-message = "Mayor o igual a 0"
+                        q-select.col(
+                            label    = "Sede olímpica"
+                            v-model  = "headquarterSelected"
+                            :options = "headquarters"
+                            color    = "primary"
                             outlined
                         )
+                            template(
+                                slot       = "selected-item"
+                                slot-scope = "slotProps"
+                            )
+                                .ellipsis {{slotProps.opt.label}}
 
-
-                    .row.justify-end.q-gutter-sm
+                    .row.justify-end.q-gutter-sm.q-mt-md
 
                         q-btn(
                             label  = "Cancelar"

@@ -19,6 +19,10 @@ const OlympicHeadquarterPage = () =>
    import(
       /* webpackChunkName: "dashboard" */ "@/presentation/modules/intranet/pages/OlympicHeadquarter/OlympicHeadquarterPage.vue"
    );
+const SportComplexPage = () =>
+   import(
+      /* webpackChunkName: "dashboard" */ "@/presentation/modules/intranet/pages/SportComplex/SportComplexPage.vue"
+   );
 
 export const routes: RouteConfig[] = [
    {
@@ -51,6 +55,11 @@ export const routes: RouteConfig[] = [
             path: "olympic-headquarter",
             name: "olympicHeadquarter",
             component: OlympicHeadquarterPage
+         },
+         {
+            path: "sport-complex",
+            name: "sportComplex",
+            component: SportComplexPage
          }
       ]
    },
