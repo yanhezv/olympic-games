@@ -1,4 +1,8 @@
-# olympic-games
+# OLYMPIC GAMES | Frontend del proyecto
+
+La presente Frontend del proyecto fue realizado empleando las siguientes tecnologias Node >= 10.13.0, [Vue JS](https://vuejs.org/), Typescript y [Quasar Framework](https://quasar.dev/start/pick-quasar-flavour).
+
+NOTA: Asegurese de tener instalado Node antes de continuar con los siguientes pasos.
 
 ## Project setup
 ```

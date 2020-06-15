@@ -1,78 +1,130 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# OLYMPIC GAMES | Servicio API REST
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+El presente servicio es creado usando el Framework Laravel 7.0 y PHP 7.2.5, si desean probarlo sigan uno de los siguientes procedimientos de instalación para ello.
 
-## About Laravel
+Para probar los endpoint del presente servicio pueden ingresar a visualizar la siguiente [Colección de PostMan](https://documenter.getpostman.com/view/4566921/SzzhdxzC?version=latest)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instalación normal
+1. Requiere `PHP > 7.2.5` y `composer`.
+2. Instalar dependencias dentro del directorio `olympic-games`
+    ``` bash
+    composer install
+    ```
+3. Configurar conexión a base de datos en el `.env` del proyecto (Duplicar y renombrar `.env.example`). Ejemplo de conexión a MySQL:
+    ``` bash
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=olympic_games
+    DB_USERNAME=root
+    DB_PASSWORD=12345
+    ```
+4. Ejecutar las migraciones
+    ``` bash
+    php artisan migrate
+    ```
+5. Crear `Encryption Keys` para la generación de access token
+    ``` bash
+    php artisan passport:install
+    ```
+6. Llenar base de datos con seeder de prueba (Solo funciona `APP_ENV=local`)
+    ``` bash
+    php artisan db:seed
+    ```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalación usando contenedores DOCKER
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Tiene que construir y/o levantar los contenedores de `Apache para PHP` y `Mysql`. Lee el manual de instalación, construcción y encendido en el siguiente [README.md](../docker/README.md)
 
-## Learning Laravel
+2. Abrir la intancia de MySQL usando una interfaz de administración como Worbench o traves de la terminal y creé el Schema de base de datos que necesitamos. Por ejemplo denominado `olympic_games`. Recuerde que nuestro contenedor expone la instancia de MySQL en el puerto 3307 de nuestro localhost o en su defecto bajo la Dirección IP de su equipo.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. Cree y configure su Archivo `.env` a partir del `.env.example` solo debera agregar las credencial de acceso a nuestra base de datos, en este caso a nuestro contenedor para ello es necesario usar su IP ADDRESS y el puerto 3307 como sigue:
+    ``` bash
+    DB_CONNECTION=mysql
+    DB_HOST=192.168.0.102         # Nuestra IP
+    DB_PORT=3307
+    DB_DATABASE=olympic_games
+    DB_USERNAME=root
+    DB_PASSWORD=12345            # El contenedor fue creado con esta contraseña
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. Ingresar al contenedor de `APACHE` usando el siguiente comando 
+    ``` bash
+    sudo docker exec -it olympicgames_apache bash
+    ```
 
-## Laravel Sponsors
+5. Ya dentro del contenedor debemos instalar las dependencias de nuestro proyecto usando composer, luego correr las migraciones y seeder de ser necesario. Y por ultimo para visualizarlo en la web sin problemas debemos salir del contenedor y dar permisos 777 al directorio `storage` para que laravel cree sin problemas los logs de cada interacción.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    En el contenedor ubicado en: `/var/www/html/olympic-games`
+    ``` bash
+    composer install       # Instala las dependencias de nuestro proyecto
+    php artisan migrate    # Migra todas las tablas creadas
+    php artisan db:seed    # Correr seeder
+    exit                   # Comando para salir del contenedor
+    ```
+    Fuera del contenedor en: `UBUCACION_DEL_PROYECTO`
+    ``` bash
+    sudo chmod -R 777 service/storage       # Permiso de lectura y escritura
+    ```
+6. Probar que nuestro servicio esta funcionando, recomiendo usar POSTMAN para tal fin. Pueden ver la colección del presente servicio en siguiente enlace: [Colección de PostMan](https://documenter.getpostman.com/view/4566921/SzzhdxzC?version=latest).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+7. Y listo!!
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Endpoints creados
+``` bash
++----------+-----------------------------------------+--------------+
+| Method   | URI                                     | Middleware   |
++----------+-----------------------------------------+--------------+
+| GET|HEAD |                                         | web          |
+| GET|HEAD | api/areas-complejos-polideportivos      | api,auth:api |
+| GET|HEAD | api/areas-complejos-polideportivos/{id} | api,auth:api |
+| POST     | api/auth/login                          | api          |
+| GET|HEAD | api/auth/logout                         | api,auth:api |
+| POST     | api/auth/signup                         | api          |
+| POST     | api/comisionados                        | api,auth:api |
+| GET|HEAD | api/comisionados                        | api,auth:api |
+| DELETE   | api/comisionados/{id}                   | api,auth:api |
+| PUT      | api/comisionados/{id}                   | api,auth:api |
+| GET|HEAD | api/comisionados/{id}                   | api,auth:api |
+| GET|HEAD | api/complejos-deporte-unico             | api,auth:api |
+| GET|HEAD | api/complejos-deporte-unico/{id}        | api,auth:api |
+| GET|HEAD | api/complejos-deportivos                | api,auth:api |
+| POST     | api/complejos-deportivos                | api,auth:api |
+| GET|HEAD | api/complejos-deportivos/{id}           | api,auth:api |
+| PUT      | api/complejos-deportivos/{id}           | api,auth:api |
+| DELETE   | api/complejos-deportivos/{id}           | api,auth:api |
+| GET|HEAD | api/complejos-polideportivos            | api,auth:api |
+| GET|HEAD | api/complejos-polideportivos/{id}       | api,auth:api |
+| GET|HEAD | api/equipamientos                       | api,auth:api |
+| POST     | api/equipamientos                       | api,auth:api |
+| DELETE   | api/equipamientos/{id}                  | api,auth:api |
+| PUT      | api/equipamientos/{id}                  | api,auth:api |
+| GET|HEAD | api/equipamientos/{id}                  | api,auth:api |
+| GET|HEAD | api/eventos                             | api,auth:api |
+| POST     | api/eventos                             | api,auth:api |
+| DELETE   | api/eventos/{id}                        | api,auth:api |
+| GET|HEAD | api/eventos/{id}                        | api,auth:api |
+| PUT      | api/eventos/{id}                        | api,auth:api |
+| GET|HEAD | api/login                               | api          |
+| POST     | api/sedes-olimpicas                     | api,auth:api |
+| GET|HEAD | api/sedes-olimpicas                     | api,auth:api |
+| DELETE   | api/sedes-olimpicas/{id}                | api,auth:api |
+| PUT      | api/sedes-olimpicas/{id}                | api,auth:api |
+| GET|HEAD | api/sedes-olimpicas/{id}                | api,auth:api |
+| DELETE   | oauth/authorize                         | web,auth     |
+| GET|HEAD | oauth/authorize                         | web,auth     |
+| POST     | oauth/authorize                         | web,auth     |
+| GET|HEAD | oauth/clients                           | web,auth     |
+| POST     | oauth/clients                           | web,auth     |
+| PUT      | oauth/clients/{client_id}               | web,auth     |
+| DELETE   | oauth/clients/{client_id}               | web,auth     |
+| GET|HEAD | oauth/personal-access-tokens            | web,auth     |
+| POST     | oauth/personal-access-tokens            | web,auth     |
+| DELETE   | oauth/personal-access-tokens/{token_id} | web,auth     |
+| GET|HEAD | oauth/scopes                            | web,auth     |
+| POST     | oauth/token                             | throttle     |
+| POST     | oauth/token/refresh                     | web,auth     |
+| GET|HEAD | oauth/tokens                            | web,auth     |
+| DELETE   | oauth/tokens/{token_id}                 | web,auth     |
++----------+-----------------------------------------+--------------+
+```

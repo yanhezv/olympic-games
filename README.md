@@ -1,88 +1,22 @@
-# API REST OLYMPIC GAMES
+# OLYMPIC GAMES PROJECT
 
-## Requerimientos de instalación
-1. Requiere `PHP > 7.2.5` y `composer`.
-2. Instalar dependencias dentro del directorio `olympic-games`
-    ``` bash
-    composer install
-    ```
-3. Configurar conexión a base de datos en el `.env` del proyecto (Duplicar y renombrar `.env.example`). Ejemplo de conexión a MySQL:
-    ``` bash
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=olympic_games
-    DB_USERNAME=root
-    DB_PASSWORD=12345
-    ```
-4. Ejecutar las migraciones
-    ``` bash
-    php artisan migrate
-    ```
-5. Crear `Encryption Keys` para la generación de access token
-    ``` bash
-    php artisan passport:install
-    ```
-6. Llenar base de datos con seeder de prueba (Solo funciona `APP_ENV=local`)
-    ``` bash
-    php artisan db:seed
-    ```
+El presente proyecto tiene implementado el Backend y Frontend para Adminsitrar los Juegos Olímpicos que solicitado como parte de un desafió como Fullstack Developer.
 
-## Endpoints creados
-``` bash
-+----------+-----------------------------------------+--------------+
-| Method   | URI                                     | Middleware   |
-+----------+-----------------------------------------+--------------+
-| GET|HEAD |                                         | web          |
-| GET|HEAD | api/areas-complejos-polideportivos      | api,auth:api |
-| GET|HEAD | api/areas-complejos-polideportivos/{id} | api,auth:api |
-| POST     | api/auth/login                          | api          |
-| GET|HEAD | api/auth/logout                         | api,auth:api |
-| POST     | api/auth/signup                         | api          |
-| POST     | api/comisionados                        | api,auth:api |
-| GET|HEAD | api/comisionados                        | api,auth:api |
-| DELETE   | api/comisionados/{id}                   | api,auth:api |
-| PUT      | api/comisionados/{id}                   | api,auth:api |
-| GET|HEAD | api/comisionados/{id}                   | api,auth:api |
-| GET|HEAD | api/complejos-deporte-unico             | api,auth:api |
-| GET|HEAD | api/complejos-deporte-unico/{id}        | api,auth:api |
-| GET|HEAD | api/complejos-deportivos                | api,auth:api |
-| POST     | api/complejos-deportivos                | api,auth:api |
-| GET|HEAD | api/complejos-deportivos/{id}           | api,auth:api |
-| PUT      | api/complejos-deportivos/{id}           | api,auth:api |
-| DELETE   | api/complejos-deportivos/{id}           | api,auth:api |
-| GET|HEAD | api/complejos-polideportivos            | api,auth:api |
-| GET|HEAD | api/complejos-polideportivos/{id}       | api,auth:api |
-| GET|HEAD | api/equipamientos                       | api,auth:api |
-| POST     | api/equipamientos                       | api,auth:api |
-| DELETE   | api/equipamientos/{id}                  | api,auth:api |
-| PUT      | api/equipamientos/{id}                  | api,auth:api |
-| GET|HEAD | api/equipamientos/{id}                  | api,auth:api |
-| GET|HEAD | api/eventos                             | api,auth:api |
-| POST     | api/eventos                             | api,auth:api |
-| DELETE   | api/eventos/{id}                        | api,auth:api |
-| GET|HEAD | api/eventos/{id}                        | api,auth:api |
-| PUT      | api/eventos/{id}                        | api,auth:api |
-| GET|HEAD | api/login                               | api          |
-| POST     | api/sedes-olimpicas                     | api,auth:api |
-| GET|HEAD | api/sedes-olimpicas                     | api,auth:api |
-| DELETE   | api/sedes-olimpicas/{id}                | api,auth:api |
-| PUT      | api/sedes-olimpicas/{id}                | api,auth:api |
-| GET|HEAD | api/sedes-olimpicas/{id}                | api,auth:api |
-| DELETE   | oauth/authorize                         | web,auth     |
-| GET|HEAD | oauth/authorize                         | web,auth     |
-| POST     | oauth/authorize                         | web,auth     |
-| GET|HEAD | oauth/clients                           | web,auth     |
-| POST     | oauth/clients                           | web,auth     |
-| PUT      | oauth/clients/{client_id}               | web,auth     |
-| DELETE   | oauth/clients/{client_id}               | web,auth     |
-| GET|HEAD | oauth/personal-access-tokens            | web,auth     |
-| POST     | oauth/personal-access-tokens            | web,auth     |
-| DELETE   | oauth/personal-access-tokens/{token_id} | web,auth     |
-| GET|HEAD | oauth/scopes                            | web,auth     |
-| POST     | oauth/token                             | throttle     |
-| POST     | oauth/token/refresh                     | web,auth     |
-| GET|HEAD | oauth/tokens                            | web,auth     |
-| DELETE   | oauth/tokens/{token_id}                 | web,auth     |
-+----------+-----------------------------------------+--------------+
-```
+## BACKEND
+Toda la implementación del Backend se encuentra ubicado en el directorio `./service` y es un proyecto empleando el [Framework Laravel 7.0](https://laravel.com/docs/7.x) con PHP 7.2.5. Para obtener instrucciones de como ejecutar el backend del proyecto por favor dirigirse a `./service/README.md`.
+
+- [Ver intrucciones](./service/README.md)
+- [Colección en PostMan de los EndPoint creados](https://documenter.getpostman.com/view/4566921/SzzhdxzC?version=latest)
+
+## FRONTEND
+Toda la implementación del Frontend se encuentra ubicado bajo el directorio `./webapp` y es un proyecto creado usando Node JS, [Vue JS](https://vuejs.org/), Typescript y [Quasar Framework](https://quasar.dev/start/pick-quasar-flavour). Para obtener instrucciones de como instalar y ejecutar el frontend del proyecto por favor dirigirse a `./webapp/README.md`.
+
+- [Ver intrucciones](./webapp/README.md)
+
+## DOCKER
+Usar Docker en nuestro proyecto me ha facilitado levantar todo el ambiente de desarrollo de manera practica y sencilla, es por ello que en el directorio `./docker` se encuentran las imagenes de nuestro `Apache Server` y `MySQL` que son necesarios para levantar nuestro servicio. Para obtener mas detalles de como levantar estos contenedores por favor dirigirse a `./docker/README.md`.
+
+- [Ver intrucciones](./docker/README.md)
+
+## MODELO DE BASE DE DATOS
+![alt text](./database/OlympicGames.png)
