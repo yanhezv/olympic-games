@@ -48,7 +48,6 @@ q-layout(view='lHr LpR lFr')
         //- q-separator
 
         q-list(padding)
-            q-item-label(header) Essential Links
             q-item(
                 :to = "{ name: 'dashboard' }"
                 exact
@@ -60,16 +59,29 @@ q-layout(view='lHr LpR lFr')
                 q-item-section
                     q-item-label Inicio
 
+            q-item-label(header) Módulos
+
             q-item(
                 :to = "{ name: 'olympicHeadquarter' }"
                 exact
                 v-ripple
             )
                 q-item-section(side)
-                    q-icon(name="search")
+                    q-icon(name="public")
 
                 q-item-section
                     q-item-label Sedes olímpicas
 
-    q-page-container
+            q-item(
+                :to = "{ name: 'sportComplex' }"
+                exact
+                v-ripple
+            )
+                q-item-section(side)
+                    q-icon(name="public")
+
+                q-item-section
+                    q-item-label Complejos deportivos
+
+    q-page-container.l-intranet__container
         router-view

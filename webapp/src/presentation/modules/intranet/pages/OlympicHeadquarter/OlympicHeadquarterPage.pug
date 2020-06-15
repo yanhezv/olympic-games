@@ -1,2 +1,141 @@
-.p-olympic-headquarter
-    h6 OLympic HEADQUARTER
+.p-olympic-headquarter.q-pa-md
+    q-table(
+        :data              = "olympicHeadquarters"
+        :columns           = "columns"
+        :loading           = "loading"
+        :filter            = "filter"
+        title              = "Sedes olímpicas"
+        row-key            = "name"
+        color              = "primary"
+        table-header-class = "text-primary"
+        :pagination        = "{rowsPerPage: 7}"
+        flat
+    )
+        q-td(
+            slot       = "body-cell-number_order"
+            slot-scope = "props"
+            :props     = "props"
+        ) {{ (props.rowIndex < 9) ? '0' + (props.rowIndex + 1) : (props.rowIndex + 1) }}
+
+        q-td(
+            slot       = "body-cell-actions"
+            slot-scope = "props"
+            :props       = "props"
+        )
+            q-btn(
+                @click = "editItem(props.row)"
+                color  = "secondary"
+                round
+                flat
+            )
+                q-icon(name="edit")
+                q-tooltip(
+                    content-class = "bg-dark text-white shadow-3"
+                    :offset       = "[0, 0]"
+                ) Editar
+
+            q-btn(
+                @click = "removeItem(props.row)"
+                color  = "secondary"
+                round
+                flat
+            )
+                q-icon(name="delete")
+                q-tooltip(
+                    content-class = "bg-dark text-white shadow-3"
+                    :offset       = "[0, 0]"
+                ) Eliminar
+
+        template(v-slot:top-right)
+            q-input.q-mr-md(
+                debounce    = "300"
+                v-model     = "filter"
+                placeholder = "Buscar"
+                borderless
+                dense
+            )
+                q-icon(slot="append", name="search")
+
+            q-btn(
+                @click = "addItem"
+                color  = "primary"
+                label  = "Nuevo"
+            )
+                q-tooltip(
+                    content-class = "bg-dark text-white shadow-3"
+                    :offset       = "[0, 0]"
+                ) Agregar nueva sede olímpica
+
+    q-dialog(v-model="dialogForm")
+        q-card
+            q-card-section
+                .text-h6 {{ editMode ? 'Actualizando Sede Olímpica' : 'Nueva Sede Olímpica'}}
+
+            q-card-section
+                q-form(@submit.prevent.stop = "save")
+                    .row.q-gutter-sm
+                        q-input.col-12.col-sm(
+                            name          = "name"
+                            v-model       = "currentItem.name"
+                            label         = "Nombre de sede"
+                            :rules        = "[ val => val.length > 0 ]"
+                            error-message = "Requerido"
+                            outlined
+                        )
+
+                        q-input.col-12.col-sm(
+                            name          = "location"
+                            v-model       = "currentItem.location"
+                            label         = "Ubicación de la sede"
+                            :rules        = "[ val => val.length > 0 ]"
+                            error-message = "Requerido"
+                            outlined
+                        )
+
+                    .row.q-gutter-sm
+                        q-input.col(
+                            name          = "number_of_complexes"
+                            type          = "number"
+                            v-model       = "currentItem.number_of_complexes"
+                            label         = "N° de complejos"
+                            :rules        = "[ val => parseInt(val,10) >= 0 ]"
+                            error-message = "Mayor o igual a 0"
+                            outlined
+                        )
+
+                        q-input.col(
+                            name          = "budget"
+                            v-model       = "currentItem.budget"
+                            label         = "Presupuesto"
+                            :rules        = "[ val => parseInt(val,10) >= 0 ]"
+                            error-message = "Mayor o igual a 0"
+                            outlined
+                        )
+
+
+                    .row.justify-end.q-gutter-sm
+
+                        q-btn(
+                            label  = "Cancelar"
+                            color  = "secondary"
+                            @click = "resetCurrentItem"
+                            v-close-popup
+                            outline
+                        )
+
+                        q-btn(
+                            v-if   = "!editMode"
+                            type   = "submit"
+                            label  = "Crear"
+                            color  = "primary"
+                            outline
+                        )
+
+                        q-btn(
+                            v-if   = "editMode"
+                            type   = "submit"
+                            label  = "Actualizar"
+                            color  = "primary"
+                            outline
+                        )
+
